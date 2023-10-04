@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/robfig/cron/v3"
+	cron "github.com/robfig/cron/v3"
 )
 
 func main() {
@@ -15,14 +15,14 @@ func main() {
 	c.AddFunc("0 30 * * * *", func() { fmt.Println("Every hour on the half hour") })
 	c.AddFunc("TZ=America/New_York 30 04 * * * *", func() { fmt.Println("Runs at 04:30 New York time every day") })
 	c.AddFunc("@hourly", func() { fmt.Println("Runs every hour") })
-	c.AddFunc("@every 0h0m1s", func() { sayHelloTo("Someone!") })
+	c.AddFunc("@every 0h0m5s", func() { sayHelloTo("Roost!") })
 	c.Start()
 
 	// Funcs may also be added to a running Cron
 	c.AddFunc("@daily", func() { fmt.Println("Every day") })
 
 	// Added time to see output
-	time.Sleep(10 * time.Second)
+	time.Sleep(10 * time.Minute)
 
 	c.Stop() // Stop the scheduler (does not stop any jobs already running)
 
